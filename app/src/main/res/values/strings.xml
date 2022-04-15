@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">EmployeeBonding</string>
+    <string name="back4app_server_url">https://parseapi.back4app.com/</string>
+
+    <!-- Paste BOTH strings as required -->
+    <string name="back4app_app_id">ZBuBvUWDP1M03deaRpL6nixbI6ousoMwciFuC2jO</string>
+    <string name="back4app_client_key">wa60I9qXvL73LTFAu3kCxZVYFkSgjvDY4ShwOz1G</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
