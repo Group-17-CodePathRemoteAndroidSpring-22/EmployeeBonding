@@ -8,7 +8,7 @@ class EmployeeBondingApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        //ParseObject.registerSubclass(Post::class.java)
+        ParseObject.registerSubclass(Organization::class.java)
         Parse.initialize(
             Parse.Configuration.Builder(this)
                 .applicationId(getString(R.string.back4app_app_id))
