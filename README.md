@@ -93,7 +93,7 @@ An app that connects employees (users) of a team in an organization and provides
    | Property      | Type     | Description |
    | ------------- | -------- | ------------|
    | objectId      | String   | unique id for the employee (default field) |
-   | name          | String   | name of organization |
+   | name          | String   | name of employee |
    | worksAt      | Pointer to Organization   | Employee belongs to an organization |
    
    
