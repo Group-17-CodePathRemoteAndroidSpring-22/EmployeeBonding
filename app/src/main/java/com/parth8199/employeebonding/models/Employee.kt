@@ -26,8 +26,8 @@ class Employee : ParseObject() {
         put(KEY_EMPNAME, name)
     }
 
-    fun setWorksIn(worksAt: ParseObject) {
-        put(KEY_WORKSIN, worksAt)
+    fun setWorksIn(workIn: ParseObject) {
+        put(KEY_WORKSIN, workIn)
     }
 
 

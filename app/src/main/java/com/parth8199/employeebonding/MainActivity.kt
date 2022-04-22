@@ -49,25 +49,6 @@ class MainActivity : AppCompatActivity() {
                 .setLabel("Log Out")
                 .create()
         )
-
-        speedDialView.setOnActionSelectedListener(SpeedDialView.OnActionSelectedListener { actionItem ->
-            when (actionItem.id) {
-                R.id.fab_log_out -> {
-                    ParseUser.logOut()
-                    val currentUser = ParseUser.getCurrentUser()
-                    if (currentUser == null) {
-                        val intent = Intent(this@MainActivity, LoginActivity::class.java)
-                        startActivity(intent)
-                        finish()
-                    }
-                    Toast.makeText(this, "Logged Out", Toast.LENGTH_SHORT).show()
-                    speedDialView.close() // To close the Speed Dial with animation
-                    return@OnActionSelectedListener true // false will close it without animation
-                }
-            }
-            false
-        })
-
         speedDialView.addActionItem(
             SpeedDialActionItem.Builder(R.id.fab_compose_screen, R.drawable.ic_baseline_create_24)
                 .setFabBackgroundColor(
@@ -96,9 +77,20 @@ class MainActivity : AppCompatActivity() {
                 .setLabel("Create Discussion")
                 .create()
         )
-
         speedDialView.setOnActionSelectedListener(SpeedDialView.OnActionSelectedListener { actionItem ->
             when (actionItem.id) {
+                R.id.fab_log_out -> {
+                    ParseUser.logOut()
+                    val currentUser = ParseUser.getCurrentUser()
+                    if (currentUser == null) {
+                        val intent = Intent(this@MainActivity, LoginActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }
+                    Toast.makeText(this, "Logged Out", Toast.LENGTH_SHORT).show()
+                    speedDialView.close() // To close the Speed Dial with animation
+                    return@OnActionSelectedListener true // false will close it without animation
+                }
                 R.id.fab_compose_screen -> {
                     val intent = Intent(this@MainActivity, ComposeActivity::class.java)
                     startActivity(intent)
@@ -110,6 +102,7 @@ class MainActivity : AppCompatActivity() {
             }
             false
         })
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
