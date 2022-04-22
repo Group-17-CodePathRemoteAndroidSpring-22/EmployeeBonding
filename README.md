@@ -104,6 +104,7 @@ An app that connects employees (users) of a team in an organization and provides
    | objectId      | String   | unique id for the employee (default field) |
    | name          | String   | name of employee |
    | worksAt      | Pointer to Team   | Employee belongs to a Team under an Organization |
+   | user_link | Pointer to ParseUser | Link to the ParseUser |
    
    
 #### Discussion 
