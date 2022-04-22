@@ -9,6 +9,8 @@ class EmployeeBondingApplication : Application() {
         super.onCreate()
 
         ParseObject.registerSubclass(Organization::class.java)
+        ParseObject.registerSubclass(Team::class.java)
+        ParseObject.registerSubclass(Employee::class.java)
         Parse.initialize(
             Parse.Configuration.Builder(this)
                 .applicationId(getString(R.string.back4app_app_id))
