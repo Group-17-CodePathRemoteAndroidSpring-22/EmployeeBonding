@@ -1,4 +1,4 @@
-package com.parth8199.employeebonding
+package com.parth8199.employeebonding.models
 
 import com.parse.ParseClassName
 import com.parse.ParseObject
