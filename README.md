@@ -123,7 +123,7 @@ An app that connects employees (users) of a team in an organization and provides
    | ------------- | -------- | ------------|
    | objectId      | String   | unique id for the comment (default field) |
    | commentText          | String   | Text content of the comment |
-   | commentedAt      | Pointer to Discussion   | A comment belongs to a discussion |
+   | commentedIn      | Pointer to Discussion   | A comment belongs to a discussion |
    | commentedBy     | Pointer to Employee   | Employee who commented on a discussion |
    
 
