@@ -19,18 +19,40 @@ class MainActivity : AppCompatActivity() {
 
         val speedDialView = findViewById<SpeedDialView>(R.id.speedDial)
         speedDialView.addActionItem(
-            SpeedDialActionItem.Builder(R.id.fab_no_label, R.drawable.ic_baseline_exit_to_app_24_white)
-                .setFabBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.purple_200, getTheme()))
-                .setFabImageTintColor(ResourcesCompat.getColor(getResources(), R.color.white, getTheme()))
+            SpeedDialActionItem.Builder(
+                R.id.fab_log_out,
+                R.drawable.ic_baseline_exit_to_app_24_white
+            )
+                .setFabBackgroundColor(
+                    ResourcesCompat.getColor(
+                        getResources(),
+                        R.color.purple_200,
+                        getTheme()
+                    )
+                )
+                .setFabImageTintColor(
+                    ResourcesCompat.getColor(
+                        getResources(),
+                        R.color.white,
+                        getTheme()
+                    )
+                )
                 .setLabelColor(Color.DKGRAY)
-                .setLabelBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.white, getTheme()))
+                .setLabelBackgroundColor(
+                    ResourcesCompat.getColor(
+                        getResources(),
+                        R.color.white,
+                        getTheme()
+                    )
+                )
                 .setLabelClickable(false)
                 .setLabel("Log Out")
-                .create())
+                .create()
+        )
 
         speedDialView.setOnActionSelectedListener(SpeedDialView.OnActionSelectedListener { actionItem ->
             when (actionItem.id) {
-                R.id.fab_no_label -> {
+                R.id.fab_log_out -> {
                     ParseUser.logOut()
                     val currentUser = ParseUser.getCurrentUser()
                     if (currentUser == null) {
@@ -38,7 +60,50 @@ class MainActivity : AppCompatActivity() {
                         startActivity(intent)
                         finish()
                     }
-                    Toast.makeText(this,"Logged Out", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Logged Out", Toast.LENGTH_SHORT).show()
+                    speedDialView.close() // To close the Speed Dial with animation
+                    return@OnActionSelectedListener true // false will close it without animation
+                }
+            }
+            false
+        })
+
+        speedDialView.addActionItem(
+            SpeedDialActionItem.Builder(R.id.fab_compose_screen, R.drawable.ic_baseline_create_24)
+                .setFabBackgroundColor(
+                    ResourcesCompat.getColor(
+                        getResources(),
+                        R.color.purple_200,
+                        getTheme()
+                    )
+                )
+                .setFabImageTintColor(
+                    ResourcesCompat.getColor(
+                        getResources(),
+                        R.color.white,
+                        getTheme()
+                    )
+                )
+                .setLabelColor(Color.DKGRAY)
+                .setLabelBackgroundColor(
+                    ResourcesCompat.getColor(
+                        getResources(),
+                        R.color.white,
+                        getTheme()
+                    )
+                )
+                .setLabelClickable(false)
+                .setLabel("Create Discussion")
+                .create()
+        )
+
+        speedDialView.setOnActionSelectedListener(SpeedDialView.OnActionSelectedListener { actionItem ->
+            when (actionItem.id) {
+                R.id.fab_compose_screen -> {
+                    val intent = Intent(this@MainActivity, ComposeActivity::class.java)
+                    startActivity(intent)
+                    //finish()
+                    Toast.makeText(this, "Going to Compose Screen ", Toast.LENGTH_SHORT).show()
                     speedDialView.close() // To close the Speed Dial with animation
                     return@OnActionSelectedListener true // false will close it without animation
                 }
