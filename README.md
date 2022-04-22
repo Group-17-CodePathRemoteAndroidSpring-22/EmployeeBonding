@@ -86,7 +86,16 @@ An app that connects employees (users) of a team in an organization and provides
    | ------------- | -------- | ------------|
    | objectId      | String   | unique id for the organization (default field) |
    | name          | String   | name of organization |
-   | teamname      | String   | name of the team |
+   
+#### Team 
+
+   | Property      | Type     | Description |
+   | ------------- | -------- | ------------|
+   | objectId      | String   | unique id for the organization (default field) |
+   | teamName          | String   | name of the team |
+   | parent_company | Pointer to Organization | A team belongs to an Organization |
+   
+   
 
 #### Employee 
 
@@ -94,7 +103,7 @@ An app that connects employees (users) of a team in an organization and provides
    | ------------- | -------- | ------------|
    | objectId      | String   | unique id for the employee (default field) |
    | name          | String   | name of employee |
-   | worksAt      | Pointer to Organization   | Employee belongs to an organization |
+   | worksAt      | Pointer to Team   | Employee belongs to a Team under an Organization |
    
    
 #### Discussion 
@@ -105,7 +114,7 @@ An app that connects employees (users) of a team in an organization and provides
    | title          | String   | title of the discussion |
    | description          | String   | description of the discussion |
    | createdBy      | Pointer to Employee   | employee who created the discussion |
-   | createdAt | Pointer to Organization | Will be used to query discussion created in a team at an organization |
+   | createdIn | Pointer to Team | Will be used to query discussion created in a team thus, discussions are separated by teams|
    
 #### Comment 
 
