@@ -217,5 +217,12 @@ An app that connects employees (users) of a team in an organization and provides
             }
           }
  ```
+ ## Video Walkthrough
+
+Here's a walkthrough of implemented user stories:
+
+<img src='walkthrough.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='wtFABSpeedDial.gif' title='Video Walkthrough1' width='' alt='Video Walkthrough1' />
+<img src='walkthrough2.gif' title='Video Walkthrough2' width='' alt='Video Walkthrough_Persistent User' />
  
       
