@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.parth8199.employeebonding.models.Discussion
 
-class HomefeedAdapter(val discussions: List<Discussion>): RecyclerView.Adapter<HomefeedAdapter.ViewHolder>() {
+class HomefeedAdapter(val discussions: MutableList<Discussion>): RecyclerView.Adapter<HomefeedAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomefeedAdapter.ViewHolder {
         val context = parent.context
         val inflater = LayoutInflater.from(context)

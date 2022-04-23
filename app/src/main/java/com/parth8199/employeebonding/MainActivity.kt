@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         homeFeedRecyclerView = findViewById(R.id.homeFeedRecyclerView)
         adapter = HomefeedAdapter(discussions)
 
-        homeFeedRecyclerView.layoutManager = LinearLayoutManager(this)
+      //  homeFeedRecyclerView.layoutManager = LinearLayoutManager(this)
         homeFeedRecyclerView.adapter = adapter
         homeFeedRecyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -130,6 +130,8 @@ class MainActivity : AppCompatActivity() {
 
     fun queryDiscussions() {
         val query: ParseQuery<Discussion> = ParseQuery.getQuery(Discussion::class.java)
+        query.include(Discussion.KEY_CREATEDIN)
+        query.addDescendingOrder("createdAt")
         query.findInBackground(object : FindCallback<Discussion> {
             override fun done(discussions: MutableList<Discussion>?, e: ParseException?) {
                 if(e != null) {
