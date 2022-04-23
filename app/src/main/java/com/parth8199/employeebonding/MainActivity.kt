@@ -4,18 +4,41 @@ import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.leinardi.android.speeddial.SpeedDialActionItem
 import com.leinardi.android.speeddial.SpeedDialView
+import com.parse.FindCallback
+import com.parse.ParseException
+import com.parse.ParseQuery
 import com.parse.ParseUser
+import com.parth8199.employeebonding.models.Discussion
 
 class MainActivity : AppCompatActivity() {
+
+    lateinit var homeFeedRecyclerView: RecyclerView
+
+    lateinit var adapter: HomefeedAdapter
+
+    var discussions : MutableList<Discussion> = mutableListOf()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        homeFeedRecyclerView = findViewById(R.id.homeFeedRecyclerView)
+        adapter = HomefeedAdapter(discussions)
+
+        homeFeedRecyclerView.layoutManager = LinearLayoutManager(this)
+        homeFeedRecyclerView.adapter = adapter
+        homeFeedRecyclerView.layoutManager = LinearLayoutManager(this)
+
+        queryDiscussions()
 
         val speedDialView = findViewById<SpeedDialView>(R.id.speedDial)
         speedDialView.addActionItem(
@@ -105,10 +128,32 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    fun queryDiscussions() {
+        val query: ParseQuery<Discussion> = ParseQuery.getQuery(Discussion::class.java)
+        query.findInBackground(object : FindCallback<Discussion> {
+            override fun done(discussions: MutableList<Discussion>?, e: ParseException?) {
+                if(e != null) {
+                    Log.e(TAG, "err fetching discussions")
+                } else {
+                    if (discussions != null) {
+                        for (discussion in discussions) {
+                            Log.i(TAG, "discussion: " + discussion.getTitle())
+                        }
+                    }
+                }
+            }
+
+        })
+    }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.item_logout, menu);
         return true;
+    }
+
+    companion object {
+        const val TAG = "MainActivity"
     }
 
     fun onLogoutAction(mi: MenuItem) {
