@@ -10,8 +10,8 @@ class Employee : ParseObject() {
         return getString(KEY_EMPNAME)
     }
 
-    fun getWorksAt(): ParseObject? {
-        return getParseObject(KEY_WORKSIN)
+    fun getWorksAt(): Team? {
+        return getParseObject(KEY_WORKSIN) as Team
     }
 
     fun getUser(): ParseUser? {
@@ -26,7 +26,7 @@ class Employee : ParseObject() {
         put(KEY_EMPNAME, name)
     }
 
-    fun setWorksIn(workIn: ParseObject) {
+    fun setWorksIn(workIn: Team) {
         put(KEY_WORKSIN, workIn)
     }
 

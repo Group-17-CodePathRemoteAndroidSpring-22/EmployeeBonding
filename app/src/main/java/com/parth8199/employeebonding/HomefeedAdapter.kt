@@ -20,7 +20,7 @@ class HomefeedAdapter(val discussions: MutableList<Discussion>): RecyclerView.Ad
     override fun onBindViewHolder(holder: HomefeedAdapter.ViewHolder, position: Int) {
         val discussion: Discussion = discussions.get(position)
 
-        holder.tvUsername.text = discussion.getCreatedByEmp().toString()
+        holder.tvUsername.text = discussion.getCreatedByEmp()!!.getEmpName()
         holder.tvDiscussionTitle.text = discussion.getTitle()
     }
 

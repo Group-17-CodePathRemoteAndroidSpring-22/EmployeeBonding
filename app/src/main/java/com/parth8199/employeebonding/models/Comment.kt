@@ -10,27 +10,23 @@ class Comment : ParseObject() {
         return getString(KEY_COMMENTTEXT)
     }
 
-    //TODO : To try typecasting directly in class methods. If possible, this will make things easier
-    /*fun getCommentedByEmp() : Employee?{
+    fun getCommentedByEmp(): Employee? {
         return getParseObject(KEY_COMMENTEDBY) as Employee
-    }*/
-    fun getCommentedByEmp(): ParseObject? {
-        return getParseObject(KEY_COMMENTEDBY)
     }
 
-    fun getCommentedInDiscus(): ParseObject? {
-        return getParseObject(KEY_COMMENTEDIN)
+    fun getCommentedInDiscus(): Discussion? {
+        return getParseObject(KEY_COMMENTEDIN) as Discussion
     }
 
     fun setCommentText(cmtText: String) {
         put(KEY_COMMENTTEXT, cmtText)
     }
 
-    fun setCommentedByEmp(emp: ParseObject) {
+    fun setCommentedByEmp(emp: Employee) {
         put(KEY_COMMENTEDBY, emp)
     }
 
-    fun setCommentedInDiscus(discus: ParseObject) {
+    fun setCommentedInDiscus(discus: Discussion) {
         put(KEY_COMMENTEDIN, discus)
     }
 

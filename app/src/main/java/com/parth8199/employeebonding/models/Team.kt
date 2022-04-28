@@ -14,11 +14,11 @@ class Team : ParseObject() {
         put(KEY_TEAMNAME, teamName)
     }
 
-    fun getParent(): ParseObject? {
-        return getParseObject(KEY_PARENT)
+    fun getParent(): Organization? {
+        return getParseObject(KEY_PARENT) as Organization
     }
 
-    fun setParent(parent: ParseObject) {
+    fun setParent(parent: Organization) {
         put(KEY_PARENT, parent)
     }
 

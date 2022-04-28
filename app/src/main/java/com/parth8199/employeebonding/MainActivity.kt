@@ -25,14 +25,14 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var adapter: HomefeedAdapter
 
-    var discussions : MutableList<Discussion> = mutableListOf()
+    var discussionsList : MutableList<Discussion> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         homeFeedRecyclerView = findViewById(R.id.homeFeedRecyclerView)
-        adapter = HomefeedAdapter(discussions)
+        adapter = HomefeedAdapter(discussionsList)
 
       //  homeFeedRecyclerView.layoutManager = LinearLayoutManager(this)
         homeFeedRecyclerView.adapter = adapter
@@ -130,7 +130,7 @@ class MainActivity : AppCompatActivity() {
 
     fun queryDiscussions() {
         val query: ParseQuery<Discussion> = ParseQuery.getQuery(Discussion::class.java)
-        query.include(Discussion.KEY_CREATEDIN)
+        query.include(Discussion.KEY_CREATEDBY)
         query.addDescendingOrder("createdAt")
         query.findInBackground(object : FindCallback<Discussion> {
             override fun done(discussions: MutableList<Discussion>?, e: ParseException?) {
@@ -140,7 +140,10 @@ class MainActivity : AppCompatActivity() {
                     if (discussions != null) {
                         for (discussion in discussions) {
                             Log.i(TAG, "discussion: " + discussion.getTitle())
+                            Log.i(TAG, "discussion by: " + discussion.getCreatedByEmp()!!.getEmpName())
                         }
+                        discussionsList.addAll(discussions)
+                        adapter.notifyDataSetChanged()
                     }
                 }
             }

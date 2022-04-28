@@ -15,12 +15,12 @@ class Discussion : ParseObject() {
         return getString(KEY_DESCRIPTION)
     }
 
-    fun getCreatedByEmp() : ParseObject?{
-        return getParseObject(KEY_CREATEDBY)
+    fun getCreatedByEmp() : Employee?{
+        return getParseObject(KEY_CREATEDBY) as Employee
     }
 
-    fun getCreatedInTeam() : ParseObject? {
-        return getParseObject(KEY_CREATEDIN)
+    fun getCreatedInTeam() : Team? {
+        return getParseObject(KEY_CREATEDIN) as Team
     }
 
     fun setTitle(title : String){
@@ -31,11 +31,11 @@ class Discussion : ParseObject() {
         put(KEY_DESCRIPTION, desc)
     }
 
-    fun setCreatedByEmp(emp : ParseObject){
+    fun setCreatedByEmp(emp : Employee){
         put(KEY_CREATEDBY, emp)
     }
 
-    fun setCreatedIn(team: ParseObject){
+    fun setCreatedIn(team: Team){
         put(KEY_CREATEDIN,team)
     }
 
