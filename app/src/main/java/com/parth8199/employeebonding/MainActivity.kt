@@ -18,6 +18,8 @@ import com.parse.ParseException
 import com.parse.ParseQuery
 import com.parse.ParseUser
 import com.parth8199.employeebonding.models.Discussion
+import com.parth8199.employeebonding.models.Employee
+import com.parth8199.employeebonding.models.Team
 
 class MainActivity : AppCompatActivity() {
 
@@ -38,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         homeFeedRecyclerView.adapter = adapter
         homeFeedRecyclerView.layoutManager = LinearLayoutManager(this)
 
-        queryDiscussions()
+        queryCurrentState()
 
         val speedDialView = findViewById<SpeedDialView>(R.id.speedDial)
         speedDialView.addActionItem(
@@ -128,9 +130,30 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun queryDiscussions() {
+    private fun queryCurrentState() {
+        val query: ParseQuery<Employee> = ParseQuery.getQuery(Employee::class.java)
+        query.whereEqualTo(Employee.KEY_USERLINK,ParseUser.getCurrentUser())
+        query.include(Employee.KEY_WORKSIN)
+        query.findInBackground(object :FindCallback<Employee>{
+            override fun done(emps: MutableList<Employee>?, e: ParseException?) {
+                if( e!= null){
+                    Log.e(TAG, "err fetching current emp")
+                }else{
+                    if (emps != null){
+                        queryDiscussions(emps[0], emps[0].getWorksAt()!!)
+                    }
+                }
+            }
+
+        })
+    }
+
+    fun queryDiscussions(currentEmp : Employee, currentTeam : Team) {
+
         val query: ParseQuery<Discussion> = ParseQuery.getQuery(Discussion::class.java)
+        query.whereEqualTo(Discussion.KEY_CREATEDIN,currentTeam)
         query.include(Discussion.KEY_CREATEDBY)
+        query.include(Discussion.KEY_CREATEDIN)
         query.addDescendingOrder("createdAt")
         query.findInBackground(object : FindCallback<Discussion> {
             override fun done(discussions: MutableList<Discussion>?, e: ParseException?) {
@@ -141,6 +164,7 @@ class MainActivity : AppCompatActivity() {
                         for (discussion in discussions) {
                             Log.i(TAG, "discussion: " + discussion.getTitle())
                             Log.i(TAG, "discussion by: " + discussion.getCreatedByEmp()!!.getEmpName())
+                            Log.i(TAG, "discussion in: " + discussion.getCreatedInTeam()!!.getTeamName())
                         }
                         discussionsList.addAll(discussions)
                         adapter.notifyDataSetChanged()
