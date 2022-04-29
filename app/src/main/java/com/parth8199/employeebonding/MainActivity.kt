@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.leinardi.android.speeddial.SpeedDialActionItem
 import com.leinardi.android.speeddial.SpeedDialView
 import com.parse.FindCallback
@@ -24,7 +25,7 @@ import com.parth8199.employeebonding.models.Team
 class MainActivity : AppCompatActivity() {
 
     lateinit var homeFeedRecyclerView: RecyclerView
-
+    lateinit var swipeContainer: SwipeRefreshLayout
     lateinit var adapter: HomefeedAdapter
 
     var discussionsList : MutableList<Discussion> = mutableListOf()
@@ -41,6 +42,22 @@ class MainActivity : AppCompatActivity() {
         homeFeedRecyclerView.layoutManager = LinearLayoutManager(this)
 
         queryCurrentState()
+
+        swipeContainer = findViewById(R.id.swipeContainer)
+        // Setup refresh listener which triggers new data loading
+
+        swipeContainer.setOnRefreshListener {
+            // Your code to refresh the list here.
+            // Make sure you call swipeContainer.setRefreshing(false)
+            // once the network request has completed successfully.
+            queryCurrentState()
+        }
+
+        // Configure the refreshing colors
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+            android.R.color.holo_green_light,
+            android.R.color.holo_orange_light,
+            android.R.color.holo_red_light);
 
         val speedDialView = findViewById<SpeedDialView>(R.id.speedDial)
         speedDialView.addActionItem(
@@ -102,6 +119,34 @@ class MainActivity : AppCompatActivity() {
                 .setLabel("Create Discussion")
                 .create()
         )
+        speedDialView.addActionItem(
+            SpeedDialActionItem.Builder(R.id.fab_profile_screen, R.drawable.ic_baseline_person_24)
+                .setFabBackgroundColor(
+                    ResourcesCompat.getColor(
+                        getResources(),
+                        R.color.purple_200,
+                        getTheme()
+                    )
+                )
+                .setFabImageTintColor(
+                    ResourcesCompat.getColor(
+                        getResources(),
+                        R.color.white,
+                        getTheme()
+                    )
+                )
+                .setLabelColor(Color.DKGRAY)
+                .setLabelBackgroundColor(
+                    ResourcesCompat.getColor(
+                        getResources(),
+                        R.color.white,
+                        getTheme()
+                    )
+                )
+                .setLabelClickable(false)
+                .setLabel("My Discussions")
+                .create()
+        )
         speedDialView.setOnActionSelectedListener(SpeedDialView.OnActionSelectedListener { actionItem ->
             when (actionItem.id) {
                 R.id.fab_log_out -> {
@@ -124,13 +169,21 @@ class MainActivity : AppCompatActivity() {
                     speedDialView.close() // To close the Speed Dial with animation
                     return@OnActionSelectedListener true // false will close it without animation
                 }
+                R.id.fab_profile_screen -> {
+                    val intent = Intent(this@MainActivity, ProfileActivity::class.java)
+                    startActivity(intent)
+                    //finish()
+                    Toast.makeText(this, "Going to Profile Screen ", Toast.LENGTH_SHORT).show()
+                    speedDialView.close() // To close the Speed Dial with animation
+                    return@OnActionSelectedListener true // false will close it without animation
+                }
             }
             false
         })
 
     }
 
-    private fun queryCurrentState() {
+    open fun queryCurrentState() {
         val query: ParseQuery<Employee> = ParseQuery.getQuery(Employee::class.java)
         query.whereEqualTo(Employee.KEY_USERLINK,ParseUser.getCurrentUser())
         query.include(Employee.KEY_WORKSIN)
@@ -166,8 +219,9 @@ class MainActivity : AppCompatActivity() {
                             Log.i(TAG, "discussion by: " + discussion.getCreatedByEmp()!!.getEmpName())
                             Log.i(TAG, "discussion in: " + discussion.getCreatedInTeam()!!.getTeamName())
                         }
+                        adapter.clear()
                         discussionsList.addAll(discussions)
-                        adapter.notifyDataSetChanged()
+                        swipeContainer.isRefreshing = false
                     }
                 }
             }

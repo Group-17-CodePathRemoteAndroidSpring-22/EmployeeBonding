@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.parth8199.employeebonding.models.Discussion
 
-class HomefeedAdapter(val discussions: MutableList<Discussion>): RecyclerView.Adapter<HomefeedAdapter.ViewHolder>() {
+open class HomefeedAdapter(val discussions: MutableList<Discussion>): RecyclerView.Adapter<HomefeedAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomefeedAdapter.ViewHolder {
         val context = parent.context
         val inflater = LayoutInflater.from(context)
@@ -28,6 +28,16 @@ class HomefeedAdapter(val discussions: MutableList<Discussion>): RecyclerView.Ad
         return discussions.size
     }
 
+    public fun clear() {
+        discussions.clear()
+        notifyDataSetChanged()
+    }
+
+    // Add a list of items -- change to type used
+    public fun addAll(dislist: List<Discussion>) {
+        discussions.addAll(dislist)
+        notifyDataSetChanged()
+    }
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvUsername = itemView.findViewById<TextView>(R.id.tvUsername)
         val tvDiscussionTitle = itemView.findViewById<TextView>(R.id.tvDiscussionTitle)

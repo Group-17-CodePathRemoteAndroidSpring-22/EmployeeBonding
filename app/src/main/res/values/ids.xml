@@ -2,4 +2,5 @@
 <resources>
     <item name="fab_log_out" type="id" />
     <item name="fab_compose_screen" type="id" />
+    <item name="fab_profile_screen" type="id"/>
 </resources>
