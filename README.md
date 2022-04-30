@@ -26,19 +26,19 @@ An app that connects employees (users) of a team in an organization and provides
 
 **Required Must-have Stories**
 
-[x] Users can login/register according to the organization and team 
-[x] Users can view all discussions posted by his/her team members on a feed, with the oldest posts at the bottom and the newest posts at the top
-[x] Users can create a discussion post
-[x] Users can add comments on an existing discussion post
-[x] Users can see the dicussions that they have created 
+- [x] Users can login/register according to the organization and team 
+- [x] Users can view all discussions posted by his/her team members on a feed, with the oldest posts at the bottom and the newest posts at the top
+- [x] Users can create a discussion post
+- [x] Users can add comments on an existing discussion post
+- [x] Users can see the dicussions that they have created 
 
 **Optional Nice-to-have Stories**
 
-* Users can create discussions based on categories
-* Users can sort discussion on their feed based on categories
-* Categories of discussion such polls and events can be intuitive
-* Users can add attachments to the decription of a discussion. 
-* Users can view all the discussion posts created by a particular user
+- [ ] Users can create discussions based on categories
+- [ ] Users can sort discussion on their feed based on categories
+- [ ] Categories of discussion such polls and events can be intuitive
+- [ ] Users can add attachments to the decription of a discussion. 
+- [ ] Users can view all the discussion posts created by a particular user
 
 ### 2. Screen Archetypes
 
