@@ -26,11 +26,11 @@ An app that connects employees (users) of a team in an organization and provides
 
 **Required Must-have Stories**
 
-* Users can login/register according to the organization and team 
-* Users can view all discussions posted by his/her team members on a feed, with the oldest posts at the bottom and the newest posts at the top
-* Users can create a discussion post
-* Users can add comments on an existing discussion post
-* Users can see the dicussions that they have created 
+[x] Users can login/register according to the organization and team 
+[x] Users can view all discussions posted by his/her team members on a feed, with the oldest posts at the bottom and the newest posts at the top
+[x] Users can create a discussion post
+[x] Users can add comments on an existing discussion post
+[x] Users can see the dicussions that they have created 
 
 **Optional Nice-to-have Stories**
 
@@ -221,8 +221,10 @@ An app that connects employees (users) of a team in an organization and provides
 
 Here's a walkthrough of implemented user stories:
 
-<img src='wtLoginScreen.gif' title='Video Walkthrough2' width='' alt='Video Walkthrough_Login' />
-<img src='wtFABSpeedDial.gif' title='Video Walkthrough1' width='' alt='Video Walkthrough1' />
-
+<img src='wtOtherUserComment.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='wtUserAddComment.gif' title='Video Walkthrough1' width='' alt='Video Walkthrough1' />
+<img src='wtCreateDiscussion.gif' title='Video Walkthrough2' width='' alt='Video Walkthrough2' />
+<img src='wtProfileDiscussions.gif' title='Video Walkthrough3' width='' alt='Video Walkthrough3' />
+<img src='wtNavIntent.gif' title='Video Walkthrough4' width='' alt='Video Walkthrough4' />
  
       
