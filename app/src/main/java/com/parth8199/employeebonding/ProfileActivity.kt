@@ -28,7 +28,7 @@ class ProfileActivity : AppCompatActivity() {
         profileFeedRv = findViewById(R.id.rvProfileFeed)
         profileFeedAdapter = ProfileFeedAdapter(discussionsList)
 
-        //  homeFeedRecyclerView.layoutManager = LinearLayoutManager(this)
+
         profileFeedRv.adapter = profileFeedAdapter
         profileFeedRv.layoutManager = LinearLayoutManager(this)
 

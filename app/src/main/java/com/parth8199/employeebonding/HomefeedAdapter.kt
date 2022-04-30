@@ -1,5 +1,6 @@
 package com.parth8199.employeebonding
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,9 +39,20 @@ open class HomefeedAdapter(val discussions: MutableList<Discussion>): RecyclerVi
         discussions.addAll(dislist)
         notifyDataSetChanged()
     }
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
         val tvUsername = itemView.findViewById<TextView>(R.id.tvUsername)
         val tvDiscussionTitle = itemView.findViewById<TextView>(R.id.tvDiscussionTitle)
+
+        init {
+            itemView.setOnClickListener(this)
+        }
+
+        override fun onClick(p0: View?) {
+            val discussion = discussions[adapterPosition]
+            val intent = Intent(itemView.context,DiscussionActivity::class.java)
+            intent.putExtra("discussion_id", discussion.objectId)
+            itemView.context.startActivity(intent)
+        }
 
     }
 }
