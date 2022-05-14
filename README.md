@@ -1,4 +1,4 @@
-# EmployeeBonding
+# Ploytal - An App that provides a platform for employees to bond
 
 ## Table of Contents
 1. [Overview](#Overview)
